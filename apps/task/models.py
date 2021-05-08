@@ -11,10 +11,23 @@ class TimeAbstractModel(models.Model):
 
 class Project(TimeAbstractModel):
     created_by = models.ForeignKey(core_model.User, on_delete=models.SET_NULL, null=True)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
     title = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.title
+
+    def get_time_spent(self):
+        pass
+
+    def get_start_date(self):
+        return self.start_date.date()
+
+    def get_end_date(self):
+        return self.end_date.date()
+
 
 
 class Task(TimeAbstractModel):
@@ -31,9 +44,17 @@ class Task(TimeAbstractModel):
     deadline = models.DateTimeField()
     status = models.IntegerField(choices=StatusType.choices, default=StatusType.OPEN)
 
+    def __str__(self):
+        return self.title
+
+    def get_time_remaining(self):
+        pass
 
 class TaskAssignee(TimeAbstractModel):
     user = models.ForeignKey(core_model.User, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.user.get_full_name()
 
     def total_time_spent(self):
         pass
