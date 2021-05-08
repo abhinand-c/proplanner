@@ -8,9 +8,15 @@ class Role(models.Model):
     description = models.TextField(null=True, blank=True)
     is_manager = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.title
+
 class Skill(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.title
 
 class User(AbstractUser):
     class RoleLevel(models.IntegerChoices):
