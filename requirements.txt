@@ -2,3 +2,4 @@ Django
 python-decouple
 psycopg2
 gunicorn
+django-heroku
