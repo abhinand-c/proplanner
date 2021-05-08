@@ -2482,7 +2482,11 @@ pre code
         border: 0;
     }
 }
-
+.chatSend
+{
+    display: flex;
+    background-color: blue;
+}
 @media (max-width: 1199.98px)
 {
     .table-responsive-xl
@@ -5780,7 +5784,16 @@ input[type='button'].btn-block
 
 .card-text:last-child
 {
+    background-color: yellow;
     margin-bottom: 0;
+    overflow-y: auto;
+}
+
+.card-text
+{
+    background-color: yellow;
+    margin-bottom: 0;
+    overflow-y: auto;
 }
 
 .card-link:hover
