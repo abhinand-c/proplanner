@@ -16,7 +16,21 @@ class User(AbstractUser):
         JR = 0, 'Junior'
         MID = 1, 'Mid'
         SR = 2, 'Senior'
+
+    full_name = models.CharField('Full Name', max_length=150)
     role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True, blank=True)
     role_level = models.IntegerField(choices=RoleLevel.choices, default=RoleLevel.JR)
     skills = models.ManyToManyField(Skill, blank=True)
     interests = models.ManyToManyField(Skill, blank=True, related_name="skill_interests")
+
+    first_name = None
+    last_name = None
+
+    def __str__(self):
+        return self.username
+
+    def get_full_name(self):
+        return self.full_name
+
+    def get_short_name(self):
+        return self.full_name
