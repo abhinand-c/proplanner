@@ -1,0 +1,194 @@
+{% extends "common/default_layout.html" %}
+{% block page_content %}
+
+<div class="container mt--8 pb-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-5 col-md-7">
+			<div class="card bg-secondary shadow border-0">
+				<div class="card-body px-lg-5 py-lg-5">
+					<div class="text-center text-muted mb-4">
+						<small>Sign-up</small>
+					</div>
+					<form action="" method="post">
+						{% csrf_token %}
+						<div class="form-group">
+							<div class="input-group input-group-alternative">
+								{{ form.first_name }} {{ form.last_name }}
+							</div>
+						</div>
+						<div class="form-group mb-3">
+							<div class="input-group input-group-alternative">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="ni ni-single-02"></i></span>
+								</div>
+								{{ form.username }}
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group input-group-alternative">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="ni ni-email-83"></i></span>
+								</div>
+								{{ form.email }}
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group input-group-alternative">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+								</div>
+								{{ form.password1 }}
+							</div>
+							<div id="message" class="my-2" >
+								<div class="mx-2" style="font-size: 12px;">
+									<h5 class="m-0">Password must contain</h5>
+									<li id="letter" class="invalid m-0">A <b>lowercase</b> letter</li>
+									<li id="capital" class="invalid m-0">A <b>capital (uppercase)</b> letter</li>
+									<li id="number" class="invalid m-0">A <b>number</b></li>
+									<li id="length" class="invalid m-0">Minimum <b>8 characters</b></li>
+								</div>
+							  </div>
+						</div>
+						<div class="form-group">
+							<div class="input-group input-group-alternative">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+								</div>
+								{{ form.password2 }}
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="ni ni-fat-remove"  id="input-group-text" aria-hidden="True" style="color: red"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="text-center">
+							<input type="hidden" name="next" value="/" />
+							<input type="submit" value="Create Account" class="btn btn-primary my-4" />
+						</div>
+					</form>
+					{% for field in form %}
+					{% for error in field.errors %}
+					<p style="color: red">{{ error }}</p>
+					{% endfor %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+	#message {
+		display:none;
+		background: #f1f1f1;
+		color: #000;
+		position: relative;
+
+	}
+
+	/* Add a green text color and a checkmark when the requirements are right */
+	.valid {
+		color: green;
+	}
+  
+	.valid:before {
+		position: relative;
+		left: -35px;
+	}
+  
+	/* Add a red text color and an "x" icon when the requirements are wrong */
+	.invalid {
+		color: red;
+	}
+  
+	.invalid:before {
+		position: relative;
+		left: -35px;
+	}
+</style>
+<script>
+	var myInput = document.getElementById("psw");
+	var letter = document.getElementById("letter");
+	var capital = document.getElementById("capital");
+	var number = document.getElementById("number");
+	var length = document.getElementById("length");
+	var confirmPsw = document.getElementById("psw2");
+	var inputgrouptext = document.getElementById("input-group-text");
+	// When the user clicks on the password field, show the message box
+	myInput.onfocus = function() {
+	  document.getElementById("message").style.display = "block";
+	}
+  
+	// When the user clicks outside of the password field, hide the message box
+	myInput.onblur = function() {
+	  document.getElementById("message").style.display = "none";
+	}
+
+  
+	// When the user starts to type something inside the password field
+	myInput.onkeyup = function() {
+	  // Validate lowercase letters
+	  var lowerCaseLetters = /[a-z]/g;
+	  if(myInput.value.match(lowerCaseLetters)) {
+		letter.classList.remove("invalid");
+		letter.classList.add("valid");
+	  } else {
+		letter.classList.remove("valid");
+		letter.classList.add("invalid");
+	}
+
+    
+	  // Validate capital letters
+	  var upperCaseLetters = /[A-Z]/g;
+	  if(myInput.value.match(upperCaseLetters)) {
+		capital.classList.remove("invalid");
+		capital.classList.add("valid");
+	  } else {
+		capital.classList.remove("valid");
+		capital.classList.add("invalid");
+	  }
+
+    
+	  // Validate numbers
+	  var numbers = /[0-9]/g;
+	  if(myInput.value.match(numbers)) {
+		number.classList.remove("invalid");
+		number.classList.add("valid");
+	  } else {
+		number.classList.remove("valid");
+		number.classList.add("invalid");
+	  }
+
+    
+	  // Validate length
+	  if(myInput.value.length >= 8) {
+		length.classList.remove("invalid");
+		length.classList.add("valid");
+	  } else {
+		length.classList.remove("valid");
+		length.classList.add("invalid");
+	  }
+	}
+
+	confirmPsw.onfocus = function() {
+	  document.getElementById("input-group-text").style.display = "block";
+	}
+
+  
+	// When the user clicks outside of the password field, hide the message box
+	confirmPsw.onblur = function() {
+	  document.getElementById("input-group-text").style.display = "none";
+	}
+
+  
+	confirmPsw.onkeyup = function() {
+	  // Validate lowercase letters
+	  if(myInput.value==confirmPsw.value) {
+		inputgrouptext.classList.add("valid");
+	  } else {
+		inputgrouptext.classList.remove("valid");
+	}
+}
+
+  
+
+</script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% if messages %}
+<div class="modal fade" id="alert-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-muted" id="exampleModalLabel"><i class="ni ni-bell-55 ni-3x mb-4"></i></h5>
+      </div>
+      <div class="modal-body">
+        {% for message in messages %}
+            {% if message.tags == "error" %}
+                <div class="alert alert-danger text-white font-weight-bolder ">
+                {{ message }}
+                </div>
+            {% else %}
+                <div class="alert alert-dark text-white font-weight-bolder ">
+                {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- EndAlert  -->
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#alert-modal").modal('show');
+  });
+</script>
+{% endif %}

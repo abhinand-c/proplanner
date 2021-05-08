@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="iClassroom - Learn. Teach. Inspire">
+  <title>{{ title }} </title>
+  {% load static %}
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'logo/logo.svg' %}" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'common/assets/vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'common/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="{% static 'common/assets/css/argon.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'common/assets/custom/scroll.css' %}" type="text/css">
+  {% block head_content %}{% endblock %}
+</head>
+
+<body>
+
+  <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Topnav -->
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse  d-flex align-items-start" id="navbarSupportedContent">
+            <a href="/" class="navbar-nav align-items-center">
+              <img src="{% static 'logo/logo.svg' %}" style="height: 40px; background: white; border-radius: 20px;">
+            </a>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+
+          <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
+            <li class="nav-item dropdown">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="media align-items-center">
+                  <span class="avatar avatar-sm rounded-circle">
+                    <img alt="Avatar" src="{{ request.user.get_user_avatar }}">
+                  </span>
+                  <div class="media-body  ml-2  d-none d-lg-block">
+                    <span class="mb-0 text-sm font-weight-bold">{{ request.user }}</span>
+                  </div>
+                </div>
+              </a>
+              <div class="dropdown-menu  dropdown-menu-right ">
+                <div class="dropdown-header noti-title">
+                  <h6 class="text-overflow m-0">Welcome! {{ request.user }}</h6>
+                </div>
+
+                <a href="#" class="dropdown-item">
+                  <i class="ni ni-support-16"></i>
+                  <span>Support</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{% url 'logout' %}" class="dropdown-item">
+                  <i class="ni ni-user-run"></i>
+                  <span>Logout</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Header -->
+    <!-- Alert  -->
+
+    {% block page_content %}{% endblock %}
+  </div>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="{% static 'common/assets/vendor/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'common/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'common/assets/vendor/js-cookie/js.cookie.js' %}" async></script>
+  <script src="{% static 'common/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}" async></script>
+  <script src="{% static 'common/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}" async></script>
+  <!-- Argon JS -->
+  <script src="{% static 'common/assets/js/argon.js' %}" async></script>
+
+  {% include "common/alert.html" %}
+
+  {% block scripts %}{% endblock %}
+
+</body>
+
+</html>

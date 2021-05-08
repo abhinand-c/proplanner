@@ -1,0 +1,48 @@
+{% extends "common/default_layout.html" %}
+
+{% block page_content %}
+
+<div class="container mt--8 pb-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-5 col-md-7">
+			<div class="card bg-secondary shadow border-0">
+				<div class="card-body px-lg-5 py-lg-5">
+					<div class="text-center text-muted mb-4">
+						<small> {{ form_title }} </small>
+					</div>
+
+					<form action="" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						{% for field  in form %}
+						<div class="form-group mb-3">
+							<div class="input-group input-group-alternative">
+								<div class="input-group-prepend">
+									<span class="input-group-text">{{field.label}}</span>
+								</div>
+								{{ field }}
+							</div>
+						</div>
+						{% endfor %}
+						<div class="text-center">
+							{% if back %}
+							<a href="{{ back }}" class="btn btn-primary my-4">
+								Cancel
+							</a>
+							{% endif %}
+							<input type="submit" value="Submit" class="btn btn-primary my-4" />
+						</div>
+					</form>
+					{% for field in form %}
+					{% for error in field.errors %}
+					<p style="color: red">{{ error }}</p>
+					{% endfor %}
+					{% endfor %}
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}
