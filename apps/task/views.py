@@ -33,6 +33,7 @@ class ManagerProjectDetail(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(ManagerProjectDetail, self).get_context_data(*args, **kwargs)
         context['task_list'] = self.get_task_list()
+        print(dir(self.get_task_list()))
         context['create_task_form'] = self.create_task_form
         return context
 
