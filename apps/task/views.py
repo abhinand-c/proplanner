@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import TemplateView
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from . import models, forms
 
 # Create your views here.
 
-class TaskView(TemplateView):
+class TaskView(LoginRequiredMixin,TemplateView):
     """ Page showing list of tasks & actions for all Employee """
     template_name = "task/home.html"    # To do - Employee Task Page
 
@@ -21,7 +22,7 @@ class TaskView(TemplateView):
         return models.TaskAssignee.objects.filter(user=self.request.user)
 
 
-class ManagerDash(TemplateView):
+class ManagerDash(LoginRequiredMixin,TemplateView):
     template_name = "task/manager_dash.html"
     create_form = forms.CreateProjectForm()
 
@@ -51,7 +52,7 @@ class ManagerDash(TemplateView):
         messages.success(self.request, 'Project Added!')
 
 
-class ManagerProjectDetail(TemplateView):
+class ManagerProjectDetail(LoginRequiredMixin,TemplateView):
     template_name = "task/manager_prodetail.html"
     create_task_form = forms.CreateTaskForm()
 
