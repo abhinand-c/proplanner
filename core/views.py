@@ -22,3 +22,6 @@ def signup(request):
     else:
         form = forms.SignUpForm()
     return render(request, 'common/form.html', {'form': form, 'next':next,'title':'Sign up',})
+
+def home(request):
+    pass

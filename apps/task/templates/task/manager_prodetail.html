@@ -79,7 +79,7 @@
                   </div>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>
@@ -96,10 +96,10 @@
         <div class="card-header border-0">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">Tasks</h3>
+              <h3 class="mb-0">Tasks | {{ project.title }}</h3>
             </div>
             <div class="col text-right"  data-toggle="modal" data-target="#createTask-Modal">
-              <a href="#!" class="btn btn-sm btn-primary">Create</a>
+              <div class="btn btn-sm btn-primary">Create</div>
             </div>
           </div>
         </div>
@@ -109,22 +109,19 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col" scope="row">Title</th>
-                <th scope="col">description</th>
                 <th scope="col">Skill</th>
                 <th scope="col">duration</th>
-                <th scope="col">deadline</th>
+                <th scope="col">Assigned To</th>
                 <th scope="col">status</th>
+                <th scope="col">deadline</th>
               </tr>
             </thead>
             <tbody>
              {% for task in task_list %}
               <tr>
-                <th scope="row">
-                  {{ task.title }}
-                </th>
-                <td>
-                  {{ task.description }}
-                </td>
+                  <th scope="row" title="{{ task.description }}" data-toggle="tooltip" data-placement="top">
+                    {{ task.title }}
+                  </th>
 
                 <td>
                    {{ task.skill.title }}
@@ -133,10 +130,17 @@
                    {{ task.duration }}
                 </td>
                 <td>
-                   {{ task.deadline }}
+                    {% for assinee in task.taskassignee_set.all %}
+                        <span data-toggle="tooltip" data-placement="top" title="{{ assinee.user.get_full_name }} ({{ assinee.user }})">
+                            {{ assinee.user }}
+                        <span>
+                    {% endfor %}
                 </td>
                 <td>
                    {{ task.get_status_display }}
+                </td>
+                <td>
+                   {{ task.deadline }}
                 </td>
               </tr>
               {% endfor %}
@@ -145,62 +149,30 @@
         </div>
       </div>
     </div>
-
-  </div>
-  <div class="row">
-    <div class="col-xl-8">
-      <div class="card bg-default">
-        <div class="card-header bg-transparent">
-          <div class="row align-items-center">
-            <div class="col">
-              <h6 class="text-light text-uppercase ls-1 mb-1">Overview</h6>
-              <h5 class="h3 text-white mb-0">Sales value</h5>
-            </div>
-            <div class="col">
-              <ul class="nav nav-pills justify-content-end">
-                <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 50, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
-                  <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
-                    <span class="d-none d-md-block">Month</span>
-                    <span class="d-md-none">M</span>
-                  </a>
-                </li>
-                <li class="nav-item" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 2, 50, 25, 10, 30, 30, 40, 0]}]}}' data-prefix="$" data-suffix="k">
-                  <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
-                    <span class="d-none d-md-block">Week</span>
-                    <span class="d-md-none">W</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <!-- Chart -->
-          <div class="chart">
-            <!-- Chart wrapper -->
-            <canvas id="chart-sales-dark" class="chart-canvas"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="col-xl-4">
-      <div class="card">
-        <div class="card-header bg-transparent">
-          <div class="row align-items-center">
-            <div class="col">
-              <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
-              <h5 class="h3 mb-0">Total orders</h5>
+        <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">ConvAI Chatbot</h5>
+          <div class="card-text">
+            <p><strong>A.I:</strong>How are you feeling today</p>
+            <p><strong>You:</strong> I'm doing good. I need some help.</p>
+            <p><strong>A.I:</strong> What can I help you with today?</p>
+            <p><strong>You:</strong> Which project should I work on?</p>
+            <p><strong>A.I:</strong> Project Wayfarer has only 3 hours worked. Maybe you can start there.</p>
+            <p><strong>You:</strong> Good idea! Thanks!</p>
+            </div>
+          <div class="row">
+              <div class="col-10">
+                  <input type="text" class="form-control" placeholder="Your message:">
+              </div>
+            <div class="col-2">
+                <a href="#" class="btn btn-sm btn-primary">Send</a>
             </div>
           </div>
-        </div>
-        <div class="card-body">
-          <!-- Chart -->
-          <div class="chart">
-            <canvas id="chart-bars" class="chart-canvas"></canvas>
           </div>
-        </div>
       </div>
     </div>
+
   </div>
 
 </div>

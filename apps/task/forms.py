@@ -9,10 +9,11 @@ class CreateTaskForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description' : forms.Textarea(attrs={'class': 'form-control', 'rows':'2'}),
-            'duration' : forms.DateTimeInput(attrs={'class': 'form-control', 'placeholder':'Duration'}),
+            'duration' : forms.DateTimeInput(attrs={'class': 'form-control', 'placeholder':'Duration in mins'}),
             'skill' : forms.Select(attrs={'class': 'form-control'}),
             'deadline' : forms.DateTimeInput(attrs={'class': 'form-control datepicker', 'placeholder':'YYYY-MM-DD'}),
         }
+
 
 class CreateProjectForm(forms.ModelForm):
     class Meta:

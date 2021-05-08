@@ -50,8 +50,34 @@ class Task(TimeAbstractModel):
     def get_time_remaining(self):
         pass
 
+    def save(self, *args, **kwargs):
+        self.duration = self.duration * 60  # converts to duration in minutes
+        super().save(*args, **kwargs)
+
+
+    def get_assignee(self):
+        user_list =  core_model.User.objects.filter(skills=self.skill)
+
+        if user_list:
+            print(user_list)
+            user = min(user_list, key=lambda x:x.assigned_time())
+            print(user)
+            return user
+        return None
+
+    def auto_assign_task(self):
+        user = self.get_assignee()
+        if user:
+            TaskAssignee.objects.create(user=user,task=self)
+            return user
+        return False
+
+
+
+
 class TaskAssignee(TimeAbstractModel):
-    user = models.ForeignKey(core_model.User, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(core_model.User, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.get_full_name()
