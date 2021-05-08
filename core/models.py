@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 class Role(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
+    is_manager = models.BooleanField(default=False)
 
 class Skill(models.Model):
     title = models.CharField(max_length=50)
