@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+import datetime
+
 # Create your models here.
 
 class Role(models.Model):
@@ -41,3 +43,11 @@ class User(AbstractUser):
 
     def get_short_name(self):
         return self.full_name
+
+
+    def assigned_time(self):
+        tasks_assigned = self.taskassignee_set.all()
+        time = datetime.timedelta(0)
+        for obj in tasks_assigned:
+            time = time + obj.task.duration
+        return time
