@@ -11,7 +11,7 @@ elif(SETTINGS_TYPE=="PRODUCTION"):
     print("Using Production Settings")
 
 elif(SETTINGS_TYPE=="HEROKU"):
-    from .production import *       # NOQA
+    from .heroku import *       # NOQA
     print("Using HEROKU Settings")
 
 else:
