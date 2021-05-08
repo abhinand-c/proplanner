@@ -18,6 +18,10 @@ class Project(TimeAbstractModel):
 
 
 class Task(TimeAbstractModel):
+    class StatusType(models.IntegerChoices):
+        OPEN = 0, 'OPEN'
+        END = 1, 'END'
+        CLOSE = 2, 'CLOSED'
     created_by = models.ForeignKey(core_model.User, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
@@ -25,6 +29,7 @@ class Task(TimeAbstractModel):
     skill = models.ForeignKey(core_model.Skill, on_delete=models.SET_NULL, null=True)
     duration = models.DurationField()       # replace duration by story points for agile scrum
     deadline = models.DateTimeField()
+    status = models.IntegerField(choices=StatusType.choices, default=StatusType.OPEN)
 
 
 class TaskAssignee(TimeAbstractModel):
