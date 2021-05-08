@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [HOST_SERVER]
 INSTALLED_APPS = [
     # Project Apps
     'core',
+    'apps.task',
 
     # Django Apps
     'django.contrib.admin',
