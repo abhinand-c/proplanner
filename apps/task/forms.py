@@ -8,7 +8,9 @@ class CreateTaskForm(forms.ModelForm):
         fields = ['title', 'description', 'skill', 'duration', 'deadline' ]
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'description' : forms.Textarea(attrs={'class': 'form-control', 'rows':'3'}),
+            'description' : forms.Textarea(attrs={'class': 'form-control', 'rows':'2'}),
+            'duration' : forms.DateTimeInput(attrs={'class': 'form-control', 'placeholder':'Duration'}),
+            'skill' : forms.Select(attrs={'class': 'form-control'}),
             'deadline' : forms.DateTimeInput(attrs={'class': 'form-control datepicker', 'placeholder':'YYYY-MM-DD'}),
         }
 
