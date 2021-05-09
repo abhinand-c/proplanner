@@ -2,6 +2,11 @@
 
 An intelligent project management system with enhanced dashboard that allows managers to track on-going projects at a glance through detailed insight reporting. Automated scheduling for employee, and Conversational AI based chatbot for queries. App will automatically assign/re-allocate employees based on various metrics (skill, schedule, backlogs, etc).
 
+Project Manger will create a project, and add tasks under it. The system will automatically assign suitable employee, after considering their skill, workload and interest. 
+Employee can see their task, start, stop and mark work as complete, with minimal effort. The system intends to recommend work to be completed by the employee, and provide human like empathetic conversational chatbot. 
+
+[Demo](https://proplannerapp.herokuapp.com/)
+
 ----
 ## Instructions to run
 1. Clone the repo using any of the following commands
