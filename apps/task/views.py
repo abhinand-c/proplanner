@@ -22,6 +22,15 @@ class TaskView(LoginRequiredMixin,TemplateView):
         return models.TaskAssignee.objects.filter(user=self.request.user)
 
 
+def completed(request, pk):
+    try:
+
+        models.Task.objects.filter(pk=pk).update(status=models.Task.StatusType.END)
+        return redirect('/')
+    except:
+        messages.error(self.request, 'could not delete')
+        return redirect('/')
+
 class ManagerDash(LoginRequiredMixin,TemplateView):
     template_name = "task/manager_dash.html"
     create_form = forms.CreateProjectForm()
