@@ -1,5 +1,6 @@
 # Pro-Planner - Intelligent Project Management System
 
+An intelligent project management system with enhanced dashboard that allows managers to track on-going projects at a glance through detailed insight reporting. Automated scheduling for employee, and Conversational AI based chatbot for queries. App will automatically assign/re-allocate employees based on various metrics (skill, schedule, backlogs, etc).
 
 ----
 ## Instructions to run
