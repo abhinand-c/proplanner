@@ -26,6 +26,14 @@ class ManagerDash(LoginRequiredMixin,TemplateView):
     template_name = "task/manager_dash.html"
     create_form = forms.CreateProjectForm()
 
+    def dispatch(self, request, *args, **kwargs):
+        # check if there is some video onsite
+        if self.request.user.is_manager():
+            return super(ManagerDash, self).dispatch(request, *args, **kwargs)
+        else:
+            messages.error(self.request, 'Permission Denied! Only managers can see Manger dashboard')
+            return redirect('home')
+
     def get_context_data(self, *args, **kwargs):
         context = super(ManagerDash, self).get_context_data(*args, **kwargs)
         context['project_list'] = self.get_project_list()
@@ -55,6 +63,14 @@ class ManagerDash(LoginRequiredMixin,TemplateView):
 class ManagerProjectDetail(LoginRequiredMixin,TemplateView):
     template_name = "task/manager_prodetail.html"
     create_task_form = forms.CreateTaskForm()
+
+    def dispatch(self, request, *args, **kwargs):
+        # check if there is some video onsite
+        if self.request.user.is_manager():
+            return super(ManagerProjectDetail, self).dispatch(request, *args, **kwargs)
+        else:
+            messages.error(self.request, 'Permission Denied! Only managers can see Manger dashboard')
+            return redirect('home')
 
     def get_context_data(self, *args, **kwargs):
         context = super(ManagerProjectDetail, self).get_context_data(*args, **kwargs)

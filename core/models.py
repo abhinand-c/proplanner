@@ -55,4 +55,4 @@ class User(AbstractUser):
     def is_manager(self):
         if self.role:
             return self.role.is_manager
-        return True
+        return True             # Using True for demo logic, replace by False
