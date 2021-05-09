@@ -22,7 +22,7 @@ Copy the code below and save it in your cloned repo as `.env` file, also add the
 ```
 
 DEBUG=True
-SECRET_KEY=
+SECRET_KEY=dummysecretkey12312412
 HOST_SERVER=localhost
 HOST_PROTOCOL=http://
 SETTINGS_TYPE=DEV
