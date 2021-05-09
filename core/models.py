@@ -51,3 +51,8 @@ class User(AbstractUser):
         for obj in tasks_assigned:
             time = time + obj.task.duration
         return time
+
+    def is_manager(self):
+        if self.role:
+            return self.role.is_manager
+        return True
